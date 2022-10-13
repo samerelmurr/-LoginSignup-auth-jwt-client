@@ -6,7 +6,7 @@ import Components from './components';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
-  const [name, setName] = useState('');
+  const [name, setName] = useState(''); 
 
   useEffect(() => {
     console.log(name);
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <Components.NavBar name={name} setName={setName}/>
+      <Components.NavBar name={name} setName={setName}/> 
       <div className="container">
         <Routes>
           <Route path="/" exact element={<Pages.Login setName={setName}/>} />
