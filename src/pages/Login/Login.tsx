@@ -2,7 +2,7 @@ import {SyntheticEvent, useState} from 'react'
 import axios from 'axios';
 import "./Login.css"
 
-const Login = () => {
+const Login = (props: { setName: (name: string) => void }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirectBool, setRedirect] = useState(false);
@@ -15,13 +15,16 @@ const Login = () => {
         UserPassword: password
       }, {withCredentials: true})
       .then(function (response) {
-        console.log(response);
+        console.log("Login", response);
       })
       .catch(function (error) {
         console.log(error);
       });
+      
+      const {data} = await axios.get('http://localhost:8000/api/user', {withCredentials: true});
 
       setRedirect(true);
+      props.setName(data.userName);
   }
 
   if (redirectBool) {

@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const NavBar = () => {
-    const [name, setName] = useState<string | null>();
-
-    const logout = async () => {
-        await axios.post('http://localhost:8000/api/logout', {withCredentials: true});
-        localStorage.setItem('name', '');
-    }
+const NavBar = (props: { name: string, setName: (name: string) => void }) => {
     
-    useEffect(() => {
-        setName(localStorage.getItem('name'));
-        console.log(name);
-    }, [name]);
+    const logout = async () => {
+        await axios.post('http://localhost:8000/api/logout', {}, {withCredentials: true});
+        props.setName('');
+    }
 
   return (
     <>
@@ -21,7 +14,7 @@ const NavBar = () => {
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">Login App</Link>
                 <div>
-                    {(name === null || name === '') ?
+                    {(props.name === null || props.name === '') ?
                         <ul className="navbar-nav me-auto mb-2 mb-md-0">
                             <li className="nav-item active">
                                 <Link className="nav-link" to="/">Login</Link>

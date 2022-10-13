@@ -1,21 +1,12 @@
-import {useState, useEffect} from 'react'
-import axios from 'axios'
+// import {useState, useEffect} from 'react'
+// import axios from 'axios'
 
-const Home = () => {
-  const [name, setName] = useState('');
-
-  useEffect(() => {
-    (async () => {
-      const {data} = await axios.get('http://localhost:8000/api/user', {withCredentials: true});
-      setName(data.userName);
-    })();
-  }, []);
-
-  localStorage.setItem('name', name);
+const Home = (props: { name: string}) => {
+  
 
   return (
     <>
-      {name ? 'Hi ' + name : 'You are not logged in'}
+      {props.name ? 'Hi ' + props.name : 'You are not logged in'}
     </>
   )
 }
